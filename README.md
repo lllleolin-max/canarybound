@@ -2,22 +2,45 @@
 
 Delayed binary outcomes can make a canary look reassuring because its adverse outcomes have not arrived. CanaryBound retains every assigned unit in its own arm/stratum denominator, computes every possible missing-outcome completion, and widens a conservative population confidence sequence around those completions. It emits separate `ACCEPTABLE`, `HARMFUL` or `INCONCLUSIVE` labels for the finite assigned cohort and the population model.
 
+面向金丝雀发布分析人员：当不良结果返回得更慢时，保留全部已分配样本，报告缺失结果可能改变结论的范围，帮助判断是否还需要等待和核查。它读取本地分配/结果日志，输出两类证据，不执行发布动作。
+
 This is conditional statistical evidence for release analysts. It does not establish a causal treatment effect or certify operational rollout safety. Declare strata, exact target weights, alpha, margins and sampling assumptions before enrolling units. The population guarantee requires iid stationary Bernoulli outcomes per cell and enrollment independent of eventual outcomes. Revelation may depend arbitrarily on the outcomes, including permanent missingness.
 
-## Quickstart
+## Quickstart / 快速开始
 
-Python 3.11+; the runtime uses the standard library.
+Python 3.11+ and Git; the runtime uses the standard library. Clone and create a virtual environment:
+
+```sh
+git clone https://github.com/lllleolin-max/canarybound.git
+cd canarybound
+python -m venv .venv
+```
+
+Activate it with `.venv\Scripts\Activate.ps1` on Windows PowerShell or `source .venv/bin/activate` on Linux/macOS. From the repository root:
 
 ```sh
 python -m pip install .
 canarybound identity examples/manifest.json
-canarybound analyze examples/manifest.json examples/events.jsonl --at 2026-01-01T00:03:00Z
+canarybound analyze examples/manifest.json examples/events.jsonl --at 2026-01-01T00:03:00Z --output report.json
+```
+
+Open `report.json`: both `finite_completion.status` and `population.status` are `INCONCLUSIVE`; `cells` records assigned and pending counts. Both commands exit 0. A valid evidence label is not a pass/fail process exit code. The example already carries the matching manifest fingerprint. Keep report paths separate from inputs; `--output` replaces an existing report.
+
+## Use your own events / 接入日志
+
+Declare the manifest before enrollment, obtain its fingerprint with `identity`, and emit `assign`/`outcome` JSONL records with that fingerprint. Run `analyze` at an explicit timezone-aware look, review the finite and population labels separately, then route the aggregate JSON to your release-review process. Use this when delayed binary results and the declared sampling assumptions fit your question; it cannot repair an incomplete assignment log or handle general continuous metrics. See [event schema and bounds](docs/ARCHITECTURE.md).
+
+## Reproduce the contrast / 可选对照
+
+```sh
 canarybound compare --size 1000
-canarybound simulate --trials 500 --steps 200 --seed 20261003
-python -m unittest discover -s tests -v
 ```
 
 The small file example is inconclusive. The size-1000 synthetic contrast uses identical assignments, target weights and margins: completed-only analysis labels early evidence `ACCEPTABLE`; retaining delayed adverse outcomes is `INCONCLUSIVE`; after all outcomes arrive it is `HARMFUL`. The all-observed complete-data baseline equals the main method. The fixed-count and completed-only methods are disclosed ablations, not advertised sequential guarantees.
+
+For the larger coverage experiment use `canarybound simulate --trials 500 --steps 200 --seed 20261003`; tests run with `python -m unittest discover -s tests -v`. These are optional after the first report.
+
+## SDK
 
 ```python
 import json
