@@ -21,7 +21,7 @@ def manifest_data():
 class IOTests(unittest.TestCase):
     def test_duplicate_json_fields(self):
         with self.assertRaises(CanaryBoundError):
-            loads('{"alpha": .1, "alpha": .2}')
+            loads('{"alpha": 0.1, "alpha": 0.2}')
 
     def test_oversized_integer(self):
         with self.assertRaises(CanaryBoundError):

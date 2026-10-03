@@ -1,0 +1,245 @@
+{
+  "synthetic": true,
+  "size_per_arm": 1000,
+  "shared_policy": {
+    "weights": {
+      "primary": "1"
+    },
+    "alpha": "0.05",
+    "acceptable_margin": "0.05",
+    "harmful_margin": "0.10"
+  },
+  "early": {
+    "sequential-pending": {
+      "schema": "canarybound-evidence-v1",
+      "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33",
+      "method": "sequential-pending",
+      "coverage": "time-uniform under declared model",
+      "at": "2026-01-01T00:03:00+00:00",
+      "estimand": "fixed-target-weighted-adverse-canary-minus-control",
+      "finite_completion": {
+        "lower": "-0.1",
+        "upper": "0.5",
+        "status": "INCONCLUSIVE"
+      },
+      "population": {
+        "lower": "-0.19539008515818412678712889817446088265219283594592399962464184383493503766573502",
+        "upper": "0.69078017031636825357425779634892176530438567189184799924928368766987007533147004",
+        "status": "INCONCLUSIVE",
+        "conditional_on": [
+          "iid-stationary-per-cell",
+          "fixed-independent-of-outcomes",
+          "all-assigned-no-outcome-filter"
+        ]
+      },
+      "cells": [
+        {
+          "stratum": "primary",
+          "arm": "canary",
+          "assigned": 1000,
+          "observed_adverse": 0,
+          "pending": 600,
+          "finite_completion": {
+            "lower": "0",
+            "upper": "0.6"
+          },
+          "population": {
+            "lower": "0",
+            "upper": "0.69539008515818412678712889817446088265219283594592399962464184383493503766573502"
+          }
+        },
+        {
+          "stratum": "primary",
+          "arm": "control",
+          "assigned": 1000,
+          "observed_adverse": 100,
+          "pending": 0,
+          "finite_completion": {
+            "lower": "0.1",
+            "upper": "0.1"
+          },
+          "population": {
+            "lower": "0.004609914841815873212871101825539117347807164054076000375358156165064962334264984",
+            "upper": "0.19539008515818412678712889817446088265219283594592399962464184383493503766573502"
+          }
+        }
+      ],
+      "interpretation": "Statistical evidence only; no causal effect or operational rollout safety claim."
+    },
+    "fixed-pending": {
+      "schema": "canarybound-evidence-v1",
+      "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33",
+      "method": "fixed-pending",
+      "coverage": "ablation only: no repeat-look or informative-delay guarantee",
+      "at": "2026-01-01T00:03:00+00:00",
+      "estimand": "fixed-target-weighted-adverse-canary-minus-control",
+      "finite_completion": {
+        "lower": "-0.1",
+        "upper": "0.5",
+        "status": "INCONCLUSIVE"
+      },
+      "population": {
+        "lower": "-0.14680826120821986703137007037035635861730941214642347055513014599849417281783625",
+        "upper": "0.59361652241643973406274014074071271723461882429284694111026029199698834563567250",
+        "status": "INCONCLUSIVE",
+        "conditional_on": [
+          "iid-stationary-per-cell",
+          "fixed-independent-of-outcomes",
+          "all-assigned-no-outcome-filter"
+        ]
+      },
+      "cells": [
+        {
+          "stratum": "primary",
+          "arm": "canary",
+          "assigned": 1000,
+          "observed_adverse": 0,
+          "pending": 600,
+          "finite_completion": {
+            "lower": "0",
+            "upper": "0.6"
+          },
+          "population": {
+            "lower": "0",
+            "upper": "0.64680826120821986703137007037035635861730941214642347055513014599849417281783625"
+          }
+        },
+        {
+          "stratum": "primary",
+          "arm": "control",
+          "assigned": 1000,
+          "observed_adverse": 100,
+          "pending": 0,
+          "finite_completion": {
+            "lower": "0.1",
+            "upper": "0.1"
+          },
+          "population": {
+            "lower": "0.053191738791780132968629929629643641382690587853576529444869854001505827182163754",
+            "upper": "0.14680826120821986703137007037035635861730941214642347055513014599849417281783625"
+          }
+        }
+      ],
+      "interpretation": "Statistical evidence only; no causal effect or operational rollout safety claim."
+    },
+    "completed-only": {
+      "schema": "canarybound-evidence-v1",
+      "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33",
+      "method": "completed-only",
+      "coverage": "ablation only: no repeat-look or informative-delay guarantee",
+      "at": "2026-01-01T00:03:00+00:00",
+      "estimand": "fixed-target-weighted-adverse-canary-minus-control",
+      "finite_completion": {
+        "lower": "-0.1",
+        "upper": "-0.1",
+        "status": "ACCEPTABLE"
+      },
+      "population": {
+        "lower": "-0.14680826120821986703137007037035635861730941214642347055513014599849417281783625",
+        "upper": "0.020818620573259785849241008162090435928812617806544570380877113737817576418699405",
+        "status": "ACCEPTABLE",
+        "conditional_on": [
+          "iid-stationary-per-cell",
+          "fixed-independent-of-outcomes",
+          "all-assigned-no-outcome-filter"
+        ]
+      },
+      "cells": [
+        {
+          "stratum": "primary",
+          "arm": "canary",
+          "assigned": 1000,
+          "observed_adverse": 0,
+          "pending": 600,
+          "finite_completion": {
+            "lower": "0",
+            "upper": "0"
+          },
+          "population": {
+            "lower": "0",
+            "upper": "0.074010359365039918817870937791734077311503205660121099825746967739323403600863159"
+          }
+        },
+        {
+          "stratum": "primary",
+          "arm": "control",
+          "assigned": 1000,
+          "observed_adverse": 100,
+          "pending": 0,
+          "finite_completion": {
+            "lower": "0.1",
+            "upper": "0.1"
+          },
+          "population": {
+            "lower": "0.053191738791780132968629929629643641382690587853576529444869854001505827182163754",
+            "upper": "0.14680826120821986703137007037035635861730941214642347055513014599849417281783625"
+          }
+        }
+      ],
+      "interpretation": "Statistical evidence only; no causal effect or operational rollout safety claim."
+    }
+  },
+  "late": {
+    "schema": "canarybound-evidence-v1",
+    "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33",
+    "method": "sequential-pending",
+    "coverage": "time-uniform under declared model",
+    "at": "2026-01-03T00:00:00+00:00",
+    "estimand": "fixed-target-weighted-adverse-canary-minus-control",
+    "finite_completion": {
+      "lower": "0.5",
+      "upper": "0.5",
+      "status": "HARMFUL"
+    },
+    "population": {
+      "lower": "0.30921982968363174642574220365107823469561432810815200075071631233012992466852996",
+      "upper": "0.69078017031636825357425779634892176530438567189184799924928368766987007533147004",
+      "status": "HARMFUL",
+      "conditional_on": [
+        "iid-stationary-per-cell",
+        "fixed-independent-of-outcomes",
+        "all-assigned-no-outcome-filter"
+      ]
+    },
+    "cells": [
+      {
+        "stratum": "primary",
+        "arm": "canary",
+        "assigned": 1000,
+        "observed_adverse": 600,
+        "pending": 0,
+        "finite_completion": {
+          "lower": "0.6",
+          "upper": "0.6"
+        },
+        "population": {
+          "lower": "0.50460991484181587321287110182553911734780716405407600037535815616506496233426498",
+          "upper": "0.69539008515818412678712889817446088265219283594592399962464184383493503766573502"
+        }
+      },
+      {
+        "stratum": "primary",
+        "arm": "control",
+        "assigned": 1000,
+        "observed_adverse": 100,
+        "pending": 0,
+        "finite_completion": {
+          "lower": "0.1",
+          "upper": "0.1"
+        },
+        "population": {
+          "lower": "0.004609914841815873212871101825539117347807164054076000375358156165064962334264984",
+          "upper": "0.19539008515818412678712889817446088265219283594592399962464184383493503766573502"
+        }
+      }
+    ],
+    "interpretation": "Statistical evidence only; no causal effect or operational rollout safety claim."
+  },
+  "all_observed_baseline_equal": true,
+  "disclosures": [
+    "The same assignments, outcomes, target weights and margins feed every method.",
+    "completed-only deletes delayed adverse outcomes: this violates its sampling assumptions.",
+    "fixed-pending is a fixed-count Hoeffding ablation; repeated looks have no advertised coverage.",
+    "No incumbent performance or production rollout safety claim."
+  ]
+}

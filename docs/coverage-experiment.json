@@ -1,0 +1,79 @@
+{
+  "synthetic": true,
+  "seed": 20261003,
+  "trials": 500,
+  "enrollment_steps_per_stream": 200,
+  "wall_clock_looks_total": 200000,
+  "alpha": "0.05",
+  "streams": 4,
+  "probabilities": [
+    "1/10",
+    "3/10",
+    "3/5",
+    "1/5"
+  ],
+  "weights": [
+    "1/4",
+    "3/4"
+  ],
+  "population_difference": "1/4",
+  "model": "fixed enrollment; independent stationary Bernoulli per stream; outcome-dependent/permanent delays",
+  "methods": {
+    "sequential-pending": {
+      "any_stream": {
+        "violations": 0,
+        "trials": 500,
+        "mc_95_hoeffding_interval": {
+          "lower": "0",
+          "upper": "0.060736146190830516859237080443309242496250242502629994706674657204523588093294406"
+        }
+      },
+      "weighted_difference": {
+        "violations": 0,
+        "trials": 500,
+        "mc_95_hoeffding_interval": {
+          "lower": "0",
+          "upper": "0.060736146190830516859237080443309242496250242502629994706674657204523588093294406"
+        }
+      }
+    },
+    "fixed-pending": {
+      "any_stream": {
+        "violations": 5,
+        "trials": 500,
+        "mc_95_hoeffding_interval": {
+          "lower": "0",
+          "upper": "0.070736146190830516859237080443309242496250242502629994706674657204523588093294406"
+        }
+      },
+      "weighted_difference": {
+        "violations": 0,
+        "trials": 500,
+        "mc_95_hoeffding_interval": {
+          "lower": "0",
+          "upper": "0.060736146190830516859237080443309242496250242502629994706674657204523588093294406"
+        }
+      }
+    },
+    "completed-only": {
+      "any_stream": {
+        "violations": 112,
+        "trials": 500,
+        "mc_95_hoeffding_interval": {
+          "lower": "0.16326385380916948314076291955669075750374975749737000529332534279547641190670559",
+          "upper": "0.28473614619083051685923708044330924249625024250262999470667465720452358809329441"
+        }
+      },
+      "weighted_difference": {
+        "violations": 0,
+        "trials": 500,
+        "mc_95_hoeffding_interval": {
+          "lower": "0",
+          "upper": "0.060736146190830516859237080443309242496250242502629994706674657204523588093294406"
+        }
+      }
+    }
+  },
+  "disclosure": "Seeded simulation is not a proof. Completed-only is assumption-violating here; fixed-pending is not time-uniform.",
+  "measured_runtime_seconds": 25.568607
+}

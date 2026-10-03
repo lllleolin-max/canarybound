@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import zipfile
 
 
@@ -25,7 +26,7 @@ def run(cmd, cwd):
     return process.returncode, process.stdout, process.stderr
 
 
-def verify(revision, probe=None):
+def verify(revision, probe=None, experiments=False):
     checkout = Path(__file__).resolve().parent.parent
     sha = subprocess.check_output(["git", "rev-parse", revision], cwd=checkout, text=True).strip()
     with tempfile.TemporaryDirectory(prefix="canarybound-verify-") as tmp:
@@ -97,6 +98,17 @@ print(json.dumps({'module_root':str(Path(canarybound.__file__).parent),'script':
             # Avoid path-bearing tracebacks: portable probe emits concise JSON.
             report["probe"] = {"sha256": hashlib.sha256(probe.read_bytes()).hexdigest(), "exit": pc,
                                "stdout": po.strip(), "stderr_nonempty": bool(pe.strip())}
+        if experiments:
+            started = time.perf_counter()
+            mc_code, mc_out, _ = run([script, "simulate", "--trials", "500", "--steps", "200", "--seed", "20261003"], root)
+            if mc_code:
+                raise RuntimeError("actual installed console simulation failed")
+            report["installed_console_mc"] = json.loads(mc_out)
+            report["installed_console_mc_runtime_seconds"] = round(time.perf_counter() - started, 6)
+            sdk_code, sdk_out, _ = run([str(python), "-c", "import json;from canarybound.experiments import contrast;print(json.dumps(contrast(1000)))"], root)
+            if sdk_code or json.loads(sdk_out) != contrast:
+                raise RuntimeError("actual SDK/console contrast differs")
+            report["sdk_console_contrast_equal"] = True
         if tests_code:
             report["suite_failures"] = [line.strip() for line in suite.splitlines() if line.startswith(("FAIL:", "ERROR:"))]
         return report
@@ -107,8 +119,9 @@ if __name__ == "__main__":
     parser.add_argument("revision")
     parser.add_argument("--probe")
     parser.add_argument("--report")
+    parser.add_argument("--experiments", action="store_true")
     args = parser.parse_args()
-    result = verify(args.revision, args.probe)
+    result = verify(args.revision, args.probe, args.experiments)
     text = json.dumps(result, indent=2) + "\n"
     if args.report:
         Path(args.report).write_text(text, encoding="utf-8")

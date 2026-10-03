@@ -1,0 +1,34 @@
+{
+  "sha": "7a5ebeef06742abc3a5be27eb39bc5a0b196bf45",
+  "python": "3.14.3",
+  "normal_archive_wheel": true,
+  "wheel_sha256": "22aee612576536607e4ab5d8ce934204b985dedd99cf3de55d46a42b574d2eb5",
+  "installed_module_byte_association": {
+    "canarybound/__init__.py": "8418a82daeef53754c8c3eee0cf3f2f706d867f877024e4d22d437d2317978a7",
+    "canarybound/__main__.py": "8134dc71036ab6fef7cb605ec59b400b2864890fc00526f9763c447e2937e295",
+    "canarybound/cli.py": "22f3746af8698261da89edf20cdfbe4ccd8dfab9acc01c1ae43cfc09c2dcc9ac",
+    "canarybound/core.py": "b5378a2fecb3e28f345fc6e8f7b7c683a1fbd8277ee7eab10d17674f7fe3b69d",
+    "canarybound/experiments.py": "ce694953449269541180b40ae0f99e0a8200e9a4619d3ccfb9d28239954bcfae",
+    "canarybound/io.py": "aa9e4e9580cef65bb951327dbc0b3a3fbb8c962b496da6bd9fd6d97d778b0041"
+  },
+  "registered_cli": "target sysconfig Scripts/bin canarybound; actual executed entry point",
+  "suite_count": 46,
+  "suite_exit": 0,
+  "console_contrast": {
+    "exit": 0,
+    "early": {
+      "sequential-pending": "INCONCLUSIVE",
+      "fixed-pending": "INCONCLUSIVE",
+      "completed-only": "ACCEPTABLE"
+    },
+    "late": "HARMFUL",
+    "all_observed_equal": true
+  },
+  "example_exit": 0,
+  "probe": {
+    "sha256": "a9f9a4e0e5e2dfce9520fd5f4bad9b530bf5637fd18b86a8707c8a0f894ad862",
+    "exit": 0,
+    "stdout": "{\"checks\": 5, \"failures\": []}",
+    "stderr_nonempty": false
+  }
+}
