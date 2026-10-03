@@ -179,6 +179,15 @@ class MathTests(unittest.TestCase):
             with self.assertRaises(CanaryBoundError):
                 radius(1, alpha, 2)
 
+    def test_extreme_alpha_manifest_identity(self):
+        for alpha in ("1e-5000", "1e-10000"):
+            m = copy.copy(demo_manifest())
+            object.__setattr__(m, "alpha", Fraction(Decimal(alpha)))
+            identity = fingerprint(m)
+            self.assertEqual(len(identity), 64)
+            result = analyze(m, [], "2026-01-01T00:01:00Z")
+            self.assertEqual(result.manifest_id, identity)
+
     def test_count_resource_and_bool(self):
         for n in [True, -1, MAX_EVENTS + 1, 10 ** 5000, 1.0]:
             with self.assertRaises(CanaryBoundError):

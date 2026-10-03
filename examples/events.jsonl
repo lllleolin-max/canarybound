@@ -1,40 +1,40 @@
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.0", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.0", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.1", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.1", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.2", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.2", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.3", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.3", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.4", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.4", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.5", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.5", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.6", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "canary.6", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.7", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "canary.7", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.8", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "canary.8", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.9", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "canary.9", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.0", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 1, "id": "control.0", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.1", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.1", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.2", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.2", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.3", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.3", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.4", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.4", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.5", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.5", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.6", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.6", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.7", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.7", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.8", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.8", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
-{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.9", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "stratum": "primary", "type": "assign"}
-{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.9", "manifest_id": "b2427eff4e7887bc2fb8c21525e7fe0bd7bb5c1591715d63c6d7582d29639ed1", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.0", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.0", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.1", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.1", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.2", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.2", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.3", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.3", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.4", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.4", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.5", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-02T00:00:00Z", "bad": 1, "id": "canary.5", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.6", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "canary.6", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.7", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "canary.7", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.8", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "canary.8", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "canary", "at": "2026-01-01T00:01:00Z", "id": "canary.9", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "canary.9", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.0", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 1, "id": "control.0", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.1", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.1", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.2", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.2", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.3", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.3", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.4", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.4", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.5", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.5", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.6", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.6", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.7", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.7", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.8", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.8", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}
+{"arm": "control", "at": "2026-01-01T00:01:00Z", "id": "control.9", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "stratum": "primary", "type": "assign"}
+{"at": "2026-01-01T00:02:00Z", "bad": 0, "id": "control.9", "manifest_id": "e09e54236d485ab4c51682da5828d8a52535a7290107702bab83e71f45106b33", "type": "outcome"}

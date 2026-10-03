@@ -95,10 +95,15 @@ class Manifest:
     outcome_filter: str = FILTER
 
     def as_dict(self) -> dict:
+        # Identity representation, not the operator input schema. Hexadecimal
+        # integers avoid Python's decimal int-to-string guard for valid tiny
+        # alpha denominators; no process-global digit limit is changed.
+        def fraction_identity(value):
+            return {"numerator_hex": hex(value.numerator), "denominator_hex": hex(value.denominator)}
         return {"name": self.name, "declared_at": self.declared_at.isoformat(),
-                "strata": {s: str(w.numerator) + "/" + str(w.denominator) for s, w in self.strata},
-                "alpha": str(self.alpha), "acceptable_margin": str(self.acceptable_margin),
-                "harmful_margin": str(self.harmful_margin), "model": self.model,
+                "strata": {s: fraction_identity(w) for s, w in self.strata},
+                "alpha": fraction_identity(self.alpha), "acceptable_margin": fraction_identity(self.acceptable_margin),
+                "harmful_margin": fraction_identity(self.harmful_margin), "model": self.model,
                 "enrollment": self.enrollment, "outcome_filter": self.outcome_filter}
 
 
