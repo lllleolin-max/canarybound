@@ -1,0 +1,41 @@
+{
+  "sha": "60c872f6a389960e9f02cacab4dd8f7ec6971624",
+  "python": "3.14.3",
+  "normal_archive_wheel": true,
+  "wheel_sha256": "095a1c7f756fa08f9a8d7eded124d6e7d898df16947d023cf718a1bb358fd1cc",
+  "installed_module_byte_association": {
+    "canarybound/__init__.py": "b746716981e0eb2a7c5d87a87c16623d56113ffbd0f653505ad5858d0f036da8",
+    "canarybound/__main__.py": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4",
+    "canarybound/cli.py": "384be8101431d8b43e877927f6195f3f292b4ae4a0c69f2e1e23bacbbca5b625",
+    "canarybound/core.py": "98898dd1ec23d665539ab1ed215242d74b9169b35f77c0971f032f0c023297ed",
+    "canarybound/experiments.py": "1cf00c2be750dacc0bd43040a6ec5dc20c7e1e59c02573cfebfa035410fb3bc6",
+    "canarybound/io.py": "23a6dc1a9bfe163b070fcc9b9825b5aaa6f0f2652649f0e3fbf7900605e837a2"
+  },
+  "all_six_git_blob_archive_wheel_site_packages_equal": true,
+  "ordinary_site_packages": true,
+  "sdk_console_contrast_equal": true,
+  "sdk_console_example_equal": true,
+  "registered_cli": "target sysconfig Scripts/bin canarybound; actual executed entry point",
+  "suite_count": 52,
+  "suite_exit": 0,
+  "console_contrast": {
+    "exit": 0,
+    "early": {
+      "sequential-pending": "INCONCLUSIVE",
+      "fixed-pending": "INCONCLUSIVE",
+      "completed-only": "ACCEPTABLE"
+    },
+    "late": "HARMFUL",
+    "all_observed_equal": true
+  },
+  "example_exit": 0,
+  "probe": {
+    "name": "independent_second_sol_canarybound_method_probe.py",
+    "sha256": "2b763d61cd35283fd929b1b3c7ac2eaa568247f07bce3b79951959692da7d946",
+    "exit": 1,
+    "stdout": "",
+    "stderr_nonempty": true,
+    "raw_typeerror_observed": true
+  },
+  "additional_probes": []
+}

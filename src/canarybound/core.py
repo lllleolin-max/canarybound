@@ -290,6 +290,8 @@ def analyze(manifest: Manifest, events: Iterable[Mapping], at: Any,
     look = timestamp(at, "look")
     if look < manifest.declared_at:
         raise CanaryBoundError("look precedes manifest declaration")
+    if type(method) is not str:
+        raise CanaryBoundError("analysis method must be a plain string")
     if method not in {"sequential-pending", "fixed-pending", "completed-only"}:
         raise CanaryBoundError("unknown analysis method")
     assignments: dict[str, tuple[str, str, datetime]] = {}

@@ -144,6 +144,19 @@ class EvidenceTests(unittest.TestCase):
         with self.assertRaises(CanaryBoundError):
             analyze(self.m, [self.assignment(), self.outcome(bad=True)], self.at)
 
+    def test_analysis_method_type_validation(self):
+        class UnhashableString(str):
+            __hash__ = None
+        for method in ([], {}, set(), None, True, 0, ("sequential-pending",), UnhashableString("sequential-pending")):
+            with self.subTest(method_type=type(method).__name__):
+                with self.assertRaisesRegex(CanaryBoundError, "method must be a plain string"):
+                    analyze(self.m, [], self.at, method=method)
+        for method in ("sequential-pending", "fixed-pending", "completed-only"):
+            with self.subTest(valid_method=method):
+                self.assertEqual(analyze(self.m, [], self.at, method=method).method, method)
+        with self.assertRaisesRegex(CanaryBoundError, "unknown analysis method"):
+            analyze(self.m, [], self.at, method="unrecognized")
+
 
 class MathTests(unittest.TestCase):
     def test_independent_formula_values(self):

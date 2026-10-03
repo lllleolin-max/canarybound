@@ -21,6 +21,7 @@ import zipfile
 def run(cmd, cwd):
     env = dict(os.environ)
     env.pop("PYTHONPATH", None)
+    env.pop("PYTHONHOME", None)
     process = subprocess.run(cmd, cwd=cwd, env=env, capture_output=True, text=True,
                              encoding="utf-8", errors="replace")
     return process.returncode, process.stdout, process.stderr
@@ -32,7 +33,8 @@ def verify(revision, probe=None, experiments=False):
     with tempfile.TemporaryDirectory(prefix="canarybound-verify-") as tmp:
         root = Path(tmp)
         archive = root / "source.zip"
-        subprocess.run(["git", "archive", "--format=zip", f"--output={archive}", sha], cwd=checkout, check=True)
+        subprocess.run(["git", "-c", "core.autocrlf=false", "-c", "core.eol=lf", "archive",
+                        "--format=zip", f"--output={archive}", sha], cwd=checkout, check=True)
         source = root / "source"
         with zipfile.ZipFile(archive) as package:
             package.extractall(source)
@@ -44,8 +46,8 @@ def verify(revision, probe=None, experiments=False):
         code, _, err = run([str(python), "-m", "pip", "wheel", str(source), "--no-deps", "--wheel-dir", str(wheels)], root)
         if code:
             raise RuntimeError("normal isolated wheel build failed")
-        wheel = next(wheels.glob("*.whl"))
-        code, _, _ = run([str(python), "-m", "pip", "install", "--no-deps", str(wheel)], root)
+        wheel, = wheels.glob("*.whl")
+        code, _, _ = run([str(python), "-m", "pip", "install", "--no-index", "--no-deps", str(wheel)], root)
         if code:
             raise RuntimeError("normal wheel installation failed")
         identity_code = """
@@ -54,6 +56,7 @@ from pathlib import Path
 d=importlib.metadata.distribution('canarybound')
 script=Path(sysconfig.get_path('scripts'))/('canarybound.exe' if __import__('os').name=='nt' else 'canarybound')
 print(json.dumps({'module_root':str(Path(canarybound.__file__).parent),'script':str(script),
+                 'site_packages':sysconfig.get_path('purelib'),
                  'entry_points':{e.name:e.value for e in d.entry_points},'python':__import__('platform').python_version()}))
 """
         code, out, _ = run([str(python), "-c", identity_code], root)
@@ -61,15 +64,23 @@ print(json.dumps({'module_root':str(Path(canarybound.__file__).parent),'script':
             raise RuntimeError("installed package import failed")
         identity = json.loads(out)
         installed = Path(identity["module_root"])
+        if installed.resolve() != (Path(identity["site_packages"]) / "canarybound").resolve():
+            raise RuntimeError("import did not come from the target's ordinary site-packages")
         association = {}
+        expected_modules = {p.name for p in (source / "src/canarybound").glob("*.py")}
+        if len(expected_modules) != 6 or {p.name for p in installed.glob("*.py")} != expected_modules:
+            raise RuntimeError("package module inventory differs")
         with zipfile.ZipFile(wheel) as package:
             for name in package.namelist():
                 if name.startswith("canarybound/") and name.endswith(".py"):
                     relative = name.removeprefix("canarybound/")
                     content = package.read(name)
                     association[name] = hashlib.sha256(content).hexdigest()
-                    if (installed / relative).read_bytes() != content or (source / "src" / name).read_bytes() != content:
+                    gitbytes = subprocess.check_output(["git", "show", sha + ":src/" + name], cwd=checkout)
+                    if content != gitbytes or (installed / relative).read_bytes() != content or (source / "src" / name).read_bytes() != content:
                         raise RuntimeError(f"byte association failed: {name}")
+        if {name.removeprefix("canarybound/") for name in association} != expected_modules:
+            raise RuntimeError("wheel module inventory differs")
         if identity["entry_points"].get("canarybound") != "canarybound.cli:main":
             raise RuntimeError("wrong registered console entry point")
         script = identity["script"]
@@ -80,11 +91,22 @@ print(json.dumps({'module_root':str(Path(canarybound.__file__).parent),'script':
         if cli_code:
             raise RuntimeError("installed console contrast failed")
         contrast = json.loads(cli_out)
+        sdk_code, sdk_out, _ = run([str(python), "-c", "import json;from canarybound.experiments import contrast;print(json.dumps(contrast(1000)))"], root)
+        if sdk_code or json.loads(sdk_out) != contrast:
+            raise RuntimeError("actual SDK/console contrast differs")
         examples_code, examples_out, examples_err = run([script, "analyze", str(source / "examples/manifest.json"),
                             str(source / "examples/events.jsonl"), "--at", "2026-01-01T00:03:00Z"], root)
+        sdk_example_code, sdk_example_out, _ = run([str(python), "-c",
+            "from canarybound import *;from canarybound.io import *;import json,sys;print(json.dumps(analyze(make_manifest(read_manifest(sys.argv[1])),read_events(sys.argv[2]),sys.argv[3]).as_dict()))",
+            str(source / "examples/manifest.json"), str(source / "examples/events.jsonl"), "2026-01-01T00:03:00Z"], root)
+        if examples_code or sdk_example_code or json.loads(examples_out) != json.loads(sdk_example_out):
+            raise RuntimeError("actual SDK/console file example differs")
         report = {"sha": sha, "python": identity["python"], "normal_archive_wheel": True,
                   "wheel_sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
                   "installed_module_byte_association": association,
+                  "all_six_git_blob_archive_wheel_site_packages_equal": True,
+                  "ordinary_site_packages": True,
+                  "sdk_console_contrast_equal": True, "sdk_console_example_equal": True,
                   "registered_cli": "target sysconfig Scripts/bin canarybound; actual executed entry point",
                   "suite_count": count, "suite_exit": tests_code,
                   "console_contrast": {"exit": cli_code,
@@ -92,12 +114,26 @@ print(json.dumps({'module_root':str(Path(canarybound.__file__).parent),'script':
                        "late": contrast["late"]["population"]["status"],
                        "all_observed_equal": contrast["all_observed_baseline_equal"]},
                   "example_exit": examples_code}
-        if probe:
-            probe = Path(probe).resolve()
-            pc, po, pe = run([str(python), str(probe)], root)
+        ci_tool = source / "tools/ci_verify.py"
+        if ci_tool.is_file():
+            ci_code, ci_out, _ = run([str(python), str(ci_tool), "--wheel-dir", str(wheels),
+                                      "--source", str(source), "--repo", str(checkout), "--ref", sha], root)
+            if ci_code:
+                raise RuntimeError("the actual CI local-wheel binding verifier failed")
+            report["ci_install_binding_verification"] = json.loads(ci_out)
+        probes = [probe] if isinstance(probe, (str, Path)) else (probe or [])
+        probe_results = []
+        for external_probe in probes:
+            external_probe = Path(external_probe).resolve()
+            pc, po, pe = run([str(python), str(external_probe)], root)
             # Avoid path-bearing tracebacks: portable probe emits concise JSON.
-            report["probe"] = {"sha256": hashlib.sha256(probe.read_bytes()).hexdigest(), "exit": pc,
-                               "stdout": po.strip(), "stderr_nonempty": bool(pe.strip())}
+            probe_results.append({"name": external_probe.name,
+                                  "sha256": hashlib.sha256(external_probe.read_bytes()).hexdigest(), "exit": pc,
+                                  "stdout": po.strip(), "stderr_nonempty": bool(pe.strip()),
+                                  "raw_typeerror_observed": "TypeError" in pe})
+        if probe_results:
+            report["probe"] = probe_results[0]
+            report["additional_probes"] = probe_results[1:]
         if experiments:
             started = time.perf_counter()
             mc_code, mc_out, _ = run([script, "simulate", "--trials", "500", "--steps", "200", "--seed", "20261003"], root)
@@ -105,10 +141,6 @@ print(json.dumps({'module_root':str(Path(canarybound.__file__).parent),'script':
                 raise RuntimeError("actual installed console simulation failed")
             report["installed_console_mc"] = json.loads(mc_out)
             report["installed_console_mc_runtime_seconds"] = round(time.perf_counter() - started, 6)
-            sdk_code, sdk_out, _ = run([str(python), "-c", "import json;from canarybound.experiments import contrast;print(json.dumps(contrast(1000)))"], root)
-            if sdk_code or json.loads(sdk_out) != contrast:
-                raise RuntimeError("actual SDK/console contrast differs")
-            report["sdk_console_contrast_equal"] = True
         if tests_code:
             report["suite_failures"] = [line.strip() for line in suite.splitlines() if line.startswith(("FAIL:", "ERROR:"))]
         return report
@@ -117,7 +149,7 @@ print(json.dumps({'module_root':str(Path(canarybound.__file__).parent),'script':
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("revision")
-    parser.add_argument("--probe")
+    parser.add_argument("--probe", action="append")
     parser.add_argument("--report")
     parser.add_argument("--experiments", action="store_true")
     args = parser.parse_args()
@@ -128,4 +160,6 @@ if __name__ == "__main__":
         report_path.parent.mkdir(parents=True, exist_ok=True)
         report_path.write_text(text, encoding="utf-8")
     print(text, end="")
-    raise SystemExit(0 if result["suite_exit"] == 0 else 1)
+    checks = [result["suite_exit"], result.get("probe", {}).get("exit", 0)]
+    checks += [p["exit"] for p in result.get("additional_probes", [])]
+    raise SystemExit(0 if all(code == 0 for code in checks) else 1)
