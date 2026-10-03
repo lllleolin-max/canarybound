@@ -1,12 +1,12 @@
 """Synthetic contrasts and repeated-look iid experiments, never safety validation."""
 from __future__ import annotations
 from collections import deque
-from decimal import Decimal, ROUND_CEILING, ROUND_FLOOR, localcontext
+from decimal import Decimal, ROUND_CEILING, ROUND_FLOOR
 from fractions import Fraction
 import math
 import random
 from .core import (CanaryBoundError, ENROLLMENT, FILTER, MODEL, MAX_EVENTS,
-                   PRECISION, Interval, analyze, fingerprint, make_manifest, radius)
+                   PRECISION, Interval, analyze, bound_context, fingerprint, make_manifest, radius)
 
 
 def demo_manifest(strata=None):
@@ -62,7 +62,7 @@ def contrast(size=1000):
 def mc_interval(violations, trials):
     if any(type(x) is not int for x in (violations, trials)) or not 1 <= trials <= 100000 or not 0 <= violations <= trials:
         raise CanaryBoundError("MC counts require 0 <= violations <= trials <= 100000")
-    with localcontext() as ctx:
+    with bound_context() as ctx:
         ctx.prec = PRECISION
         ctx.rounding = ROUND_CEILING
         eps = (Decimal(40).ln().next_plus() / Decimal(2 * trials)).sqrt().next_plus()

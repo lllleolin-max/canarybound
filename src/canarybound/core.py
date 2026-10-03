@@ -8,7 +8,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from decimal import Decimal, InvalidOperation, ROUND_CEILING, ROUND_FLOOR, localcontext
+from decimal import (Context, Decimal, DivisionByZero, InvalidOperation, Overflow,
+                     ROUND_CEILING, ROUND_FLOOR, localcontext)
 from enum import Enum
 from fractions import Fraction
 import hashlib
@@ -24,6 +25,13 @@ PRECISION = 80
 MODEL = "iid-stationary-per-cell"
 ENROLLMENT = "fixed-independent-of-outcomes"
 FILTER = "all-assigned-no-outcome-filter"
+
+
+def bound_context(rounding=ROUND_CEILING):
+    """Isolate precision, exponents, traps and flags from a caller's context."""
+    return localcontext(Context(prec=PRECISION, rounding=rounding,
+                                Emin=-999999, Emax=999999, capitals=1, clamp=0,
+                                traps=[InvalidOperation, DivisionByZero, Overflow]))
 
 
 class CanaryBoundError(ValueError):
@@ -149,7 +157,7 @@ def fingerprint(manifest: Manifest) -> str:
 
 
 def _decimal(value: Fraction, rounding: str) -> Decimal:
-    with localcontext() as ctx:
+    with bound_context(rounding) as ctx:
         ctx.prec = PRECISION
         ctx.rounding = rounding
         return Decimal(value.numerator) / Decimal(value.denominator)
@@ -184,7 +192,7 @@ def radius(n: int, alpha: Any, streams: int, *, sequential: bool = True) -> Deci
         raise CanaryBoundError("alpha must lie strictly between 0 and 1")
     if n == 0:
         return Decimal(1)
-    with localcontext() as ctx:
+    with bound_context() as ctx:
         ctx.prec = PRECISION
         ctx.rounding = ROUND_CEILING
         # Decimal ln and sqrt are correctly rounded nearest even, regardless of
@@ -214,7 +222,7 @@ def stream_bounds(n: int, s: int, m: int, alpha: Any, streams: int,
     finite = _ratio_interval(s, m, n)
     if not n:
         return finite, finite
-    with localcontext() as ctx:
+    with bound_context() as ctx:
         ctx.prec = PRECISION
         ctx.rounding = ROUND_FLOOR
         lower = max(Decimal(0), finite.lower - epsilon)

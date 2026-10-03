@@ -1,6 +1,6 @@
 import copy
 from datetime import datetime, timezone
-from decimal import Decimal, localcontext
+from decimal import Decimal, Inexact, ROUND_DOWN, localcontext
 from fractions import Fraction
 import itertools
 import math
@@ -236,6 +236,19 @@ class MathTests(unittest.TestCase):
         self.assertAlmostEqual(float(out["upper"]), min(1, .15 + eps), places=14)
         with self.assertRaises(CanaryBoundError):
             mc_interval(True, 20)
+
+    def test_decimal_operator_context_independent(self):
+        expected = (radius(37, "0.05", 2), radius(37, "1e-10000", 2), mc_interval(2, 100))
+        with localcontext() as ctx:
+            ctx.prec = 4
+            ctx.rounding = ROUND_DOWN
+            ctx.Emin, ctx.Emax = -9, 9
+            ctx.traps[Inexact] = True
+            before = (ctx.prec, ctx.rounding, ctx.Emin, ctx.Emax, dict(ctx.flags), dict(ctx.traps))
+            actual = (radius(37, "0.05", 2), radius(37, "1e-10000", 2), mc_interval(2, 100))
+            self.assertEqual(actual, expected)
+            after = (ctx.prec, ctx.rounding, ctx.Emin, ctx.Emax, dict(ctx.flags), dict(ctx.traps))
+            self.assertEqual(before, after)
 
     def test_seeded_simulation_reproducible(self):
         a = simulate(3, 10, 42)
