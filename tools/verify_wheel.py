@@ -124,6 +124,8 @@ if __name__ == "__main__":
     result = verify(args.revision, args.probe, args.experiments)
     text = json.dumps(result, indent=2) + "\n"
     if args.report:
-        Path(args.report).write_text(text, encoding="utf-8")
+        report_path = Path(args.report)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(text, encoding="utf-8")
     print(text, end="")
     raise SystemExit(0 if result["suite_exit"] == 0 else 1)
