@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "canarybound"
+version = "0.1.0"
+description = "Missing-outcome completion bounds and conservative time-uniform rollout evidence"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+authors = [{name = "lllleolin-max"}]
+dependencies = []
+
+[project.scripts]
+canarybound = "canarybound.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

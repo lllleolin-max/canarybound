@@ -1,0 +1,13 @@
+{
+  "name": "synthetic-demo",
+  "declared_at": "2026-01-01T00:00:00Z",
+  "strata": {
+    "primary": "1"
+  },
+  "alpha": "0.05",
+  "acceptable_margin": "0.05",
+  "harmful_margin": "0.10",
+  "model": "iid-stationary-per-cell",
+  "enrollment": "fixed-independent-of-outcomes",
+  "outcome_filter": "all-assigned-no-outcome-filter"
+}
