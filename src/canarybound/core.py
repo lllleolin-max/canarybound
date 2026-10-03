@@ -299,9 +299,11 @@ def analyze(manifest: Manifest, events: Iterable[Mapping], at: Any,
         if kind == "assign":
             if uid in assignments:
                 raise CanaryBoundError("duplicate assignment ID")
-            if raw["stratum"] not in strata_names or raw["arm"] not in {"canary", "control"}:
+            stratum = identifier(raw["stratum"], "stratum")
+            arm = identifier(raw["arm"], "arm")
+            if stratum not in strata_names or arm not in {"canary", "control"}:
                 raise CanaryBoundError("unknown arm/stratum stream")
-            assignments[uid] = (raw["stratum"], raw["arm"], time)
+            assignments[uid] = (stratum, arm, time)
         elif kind == "outcome":
             if uid in outcomes:
                 raise CanaryBoundError("duplicate outcome ID")

@@ -76,6 +76,14 @@ class EvidenceTests(unittest.TestCase):
             with self.assertRaises(CanaryBoundError):
                 analyze(self.m, [event], self.at)
 
+    def test_stream_container_types_rejected(self):
+        for field in ("stratum", "arm"):
+            for value in ([], {}, 10 ** 5000, True):
+                event = self.assignment()
+                event[field] = value
+                with self.assertRaises(CanaryBoundError):
+                    analyze(self.m, [event], self.at)
+
     def test_aware_utc(self):
         utc = analyze(self.m, [self.assignment()], self.at)
         offset = analyze(self.m, [self.assignment()], "2026-01-01T08:03:00+08:00")
